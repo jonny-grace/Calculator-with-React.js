@@ -1,0 +1,51 @@
+*,::after,::before{
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(to right,rgb(218, 76, 76),rgb(94, 94, 239));
+}
+
+.container-grid{
+    
+    border: 20px;
+    display: grid;
+    grid-template-columns: repeat(4,7rem);
+    flex-direction: column;
+    grid-template-rows: minmax(7rem,auto) repeat(5,4em);
+    justify-content: center;
+    margin: 2rem;
+}
+.input-Container{
+    
+    grid-column: 1/-1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    background-color: rgb(11, 10, 10,.80);
+    color: white;
+}
+.input-Container .previous-input-container{
+    
+    font-size: 25px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input-Container .current-input-container{
+    
+    font-size: 30px;
+    color: rgb(248, 243, 243);
+}
+
+.span-two{
+grid-column: span 2;}
+
+button:hover,button:active{
+    background-color: bisque;
+}
+button{
+    cursor:pointer;
+    background-color: aqua;
+    font-size: 30px;
+}

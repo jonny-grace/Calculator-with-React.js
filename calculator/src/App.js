@@ -1,7 +1,6 @@
 
 import './App.css';
-import CalculaterMain from './Component/CalculaterMain';
-import REducerExample from './Component/REducerExample';
+import CalculatorControler from './Component/CalculatorControler';
 
 function App() {
   
@@ -16,7 +15,8 @@ function App() {
       </header>
      
       <div>
-        <CalculaterMain />
+        <CalculatorControler />
+        {/* <CalculaterMain /> */}
         {/* <REducerExample /> */}
        </div>
     </div>
