@@ -2,13 +2,13 @@
     box-sizing: border-box;
 }
 
+
 body{
-    background: linear-gradient(to right,rgb(218, 76, 76),rgb(94, 94, 239));
+    background: linear-gradient(to right,rgb(40, 25, 25),rgb(25, 25, 53));
 }
 
 .container-grid{
     
-    border: 20px;
     display: grid;
     grid-template-columns: repeat(4,7rem);
     flex-direction: column;

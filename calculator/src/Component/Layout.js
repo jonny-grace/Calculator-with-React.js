@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import NumberButtonList from "./NumberButtonList";
+import { CalculatorContext } from './CalculatorControler';
 
-
-function Layout({ currentNumber, previusNumber, options,dispatch }) {
+function Layout() {
+  const calculatorContext = useContext(CalculatorContext)
   return (
     
         <div className="container-grid">
       <div className="input-Container">
         <div className="previous-input-container">
-          {previusNumber}
-          {options}
+          {calculatorContext.previusNumber}
+          {calculatorContext.options}
         </div>
-        <div className="current-input-container">{currentNumber}</div>
+        <div className="current-input-container">{calculatorContext.currentNumber}</div>
       </div>
-      <NumberButtonList dispatch={dispatch}/>
+      <NumberButtonList/>
       
     </div>
   )

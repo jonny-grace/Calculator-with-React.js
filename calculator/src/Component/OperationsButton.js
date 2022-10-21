@@ -1,8 +1,12 @@
-import React from 'react'
-import { ACTIONS } from './Actions'
+import React, { useContext } from 'react'
 
-function OperationsButton({dispatch,operator}) {
-  return <button onClick={()=>dispatch({type:ACTIONS.CONTROL_OPERATIONS,payload:{operator}})}>{operator}</button>
+import { ACTIONS } from './Actions'
+import { CalculatorContext } from './CalculatorControler'
+
+function OperationsButton({operator}) {
+  const calculatorContext = useContext(CalculatorContext)
+
+  return <button onClick={()=>calculatorContext.dispatch({type:ACTIONS.CONTROL_OPERATIONS,payload:{operator}})}>{operator}</button>
 }
 
 export default OperationsButton

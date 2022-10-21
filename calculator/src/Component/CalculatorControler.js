@@ -1,14 +1,14 @@
-import React, { useReducer } from "react";
+import React, {  useReducer } from "react";
 import "../style.css";
-import NumberButtonList from "./NumberButtonList";
 import { ACTIONS } from "./Actions";
-import AddNumber from "./AddNumber";
 import Layout from "./Layout";
-import CalculationEvaluator from "./CalculationEvaluator";
-
+import { evaluate } from "./CalculationEvaluator";
+export const CalculatorContext = React.createContext()
 function reducer(state, { type, payload }) {
+  
   switch (type) {
     case ACTIONS.ADD_NUMBER:
+     
       if (state.overFlow) {
         return {
           ...state,
@@ -16,8 +16,11 @@ function reducer(state, { type, payload }) {
           overFlow: false,
         };
       }
-      if (state.currentNumber == "0" && payload.number == "0") return state;
-      if (payload.number == "." && state.currentNumber.includes("."))
+      
+      if(state.currentNumber==null && payload.number==".") return  state
+      
+      if (state.currentNumber === "0" && payload.number === "0") return state;
+      if (payload.number === "." && state.currentNumber.includes("."))
         return state;
       return {
         ...state,
@@ -25,14 +28,14 @@ function reducer(state, { type, payload }) {
       };
 
     case ACTIONS.CONTROL_OPERATIONS:
-      if (state.currentNumber == null)
+      if (state.currentNumber == null) {
         return { ...state, options: payload.operator };
-      
-      if (state.currentNumber == null && state.currentNumber == null) {
-        return state
+      }
+      if (state.currentNumber == null && state.previusNumber == null) {
+        return state;
       }
 
-      if (state.currentNumber!=null && state.previusNumber == null) {
+      if (state.currentNumber != null && state.previusNumber == null) {
         return {
           ...state,
           previusNumber: state.currentNumber,
@@ -43,8 +46,8 @@ function reducer(state, { type, payload }) {
 
       return {
         ...state,
-        
-        previusNumber: <CalculationEvaluator state={state} />,
+        previusNumber: evaluate(state),
+
         options: payload.operator,
         currentNumber: null,
       };
@@ -66,8 +69,8 @@ function reducer(state, { type, payload }) {
         previusNumber: null,
         options: null,
 
-        currentNumber: <CalculationEvaluator state={state} />,
-        // currentNumber: evaluate(state),
+        // currentNumber: <CalculationEvaluator state={state} />,
+        currentNumber: evaluate(state),
       };
 
     case ACTIONS.DELETE_DIGIT:
@@ -81,21 +84,28 @@ function reducer(state, { type, payload }) {
         ...state,
         currentNumber: state.currentNumber.slice(0, -1),
       };
+    default: return state
   }
 }
 function CalculatorControler() {
+
   const [{ currentNumber, previusNumber, options }, dispatch] = useReducer(
     reducer,
     {}
   );
 
-  return (
-    <Layout
-      currentNumber={currentNumber}
-      previusNumber={previusNumber}
-      options={options}
-      dispatch={dispatch}
-    />
+  return (<>
+    <CalculatorContext.Provider 
+    value={{
+      currentNumber:currentNumber,
+      previusNumber:previusNumber,
+      options:options,
+      dispatch:dispatch
+    }}>
+    <Layout/>
+    </CalculatorContext.Provider>
+    
+    </>
   );
 }
 

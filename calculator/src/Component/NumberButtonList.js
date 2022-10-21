@@ -1,39 +1,42 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { ACTIONS } from './Actions'
 import OperationsButton from './OperationsButton'
 import NumberButton from './NumberButton'
-function NumberButtonList({dispatch}) {
+import { CalculatorContext } from './CalculatorControler';
+
+function NumberButtonList() {
+  const calculatorContext = useContext(CalculatorContext)
   return (
     <>
     <button
         className="span-two"
-        onClick={() => dispatch({ type: ACTIONS.CLEAR })}
+        onClick={() => calculatorContext.dispatch({ type: ACTIONS.CLEAR })}
       >
         EC
       </button>
-      <button className="del-button" onClick={()=>dispatch({type:ACTIONS.DELETE_DIGIT})}>Del</button>
+      <button className="del-button" onClick={()=>calculatorContext.dispatch({type:ACTIONS.DELETE_DIGIT})}>Del</button>
 
-      <OperationsButton dispatch={dispatch} operator="/" />
+      <OperationsButton  operator="/" />
 
-      <NumberButton dispatch={dispatch} number="9" />
-      <NumberButton dispatch={dispatch} number="8" />
-      <NumberButton dispatch={dispatch} number="7" />
+      <NumberButton  number="9" />
+      <NumberButton  number="8" />
+      <NumberButton  number="7" />
 
-      <OperationsButton dispatch={dispatch} operator="*" />
+      <OperationsButton  operator="*" />
 
-      <NumberButton dispatch={dispatch} number="6" />
-      <NumberButton dispatch={dispatch} number="5" />
-      <NumberButton dispatch={dispatch} number="4" />
+      <NumberButton  number="6" />
+      <NumberButton  number="5" />
+      <NumberButton  number="4" />
 
-      <OperationsButton dispatch={dispatch} operator="-" />
-      <NumberButton dispatch={dispatch} number="3" />
-      <NumberButton dispatch={dispatch} number="2" />
-      <NumberButton dispatch={dispatch} number="1" />
+      <OperationsButton  operator="-" />
+      <NumberButton  number="3" />
+      <NumberButton  number="2" />
+      <NumberButton  number="1" />
 
-      <OperationsButton dispatch={dispatch} operator="+" />
-      <NumberButton dispatch={dispatch} number="." />
-      <NumberButton dispatch={dispatch} number="0" />
-      <button className="span-two" onClick={()=>dispatch({type:ACTIONS.EVALUATE})}>=</button>
+      <OperationsButton  operator="+" />
+      <NumberButton  number="." />
+      <NumberButton  number="0" />
+      <button className="span-two" onClick={()=>calculatorContext.dispatch({type:ACTIONS.EVALUATE})}>=</button>
     </>
   )
 }
